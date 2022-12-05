@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useState } from 'react';
 
 export default function Meme() {
-  const [imageName, setImageName] = useState("");
   const [meme, setMeme] = useState({
     imageName:"",
     topText: "",
@@ -19,13 +18,13 @@ export default function Meme() {
   }, []);
 
   function getMemeImage() {
-    
     const randomNumber = Math.floor(Math.random() * allMemes.length);
-    setImageName(allMemes[randomNumber].name);
+    const name = allMemes[randomNumber].name;
     const url = allMemes[randomNumber].url;
     setMeme((prevMeme) => ({
       ...prevMeme,
       randomImage: url,
+      imageName: name
     }));
   }
 
@@ -35,6 +34,7 @@ export default function Meme() {
       ...prevMeme,
       [name]: value,
     }));
+    console.log(name, value);
   }
 
   return (
@@ -61,7 +61,7 @@ export default function Meme() {
         </button>
       </div>
       <div className="meme">
-        <img src={meme.randomImage} className="meme--image" alt={imageName} />
+        <img src={meme.randomImage} className="meme--image" alt={meme.imageName} />
         <h2 className="meme--text top">{meme.topText}</h2>
         <h2 className="meme--text bottom">{meme.bottomText}</h2>
       </div>
