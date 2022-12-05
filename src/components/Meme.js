@@ -3,13 +3,15 @@ import { useEffect } from "react";
 import { useState } from 'react';
 
 export default function Meme() {
+  const [imageName, setImageName] = useState("");
   const [meme, setMeme] = useState({
+    imageName:"",
     topText: "",
     bottomText: "",
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
   const [allMemes, setAllMemes] = useState([]);
-
+  
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
       .then((res) => res.json())
@@ -17,7 +19,9 @@ export default function Meme() {
   }, []);
 
   function getMemeImage() {
+    
     const randomNumber = Math.floor(Math.random() * allMemes.length);
+    setImageName(allMemes[randomNumber].name);
     const url = allMemes[randomNumber].url;
     setMeme((prevMeme) => ({
       ...prevMeme,
@@ -57,7 +61,7 @@ export default function Meme() {
         </button>
       </div>
       <div className="meme">
-        <img src={meme.randomImage} className="meme--image" />
+        <img src={meme.randomImage} className="meme--image" alt={imageName} />
         <h2 className="meme--text top">{meme.topText}</h2>
         <h2 className="meme--text bottom">{meme.bottomText}</h2>
       </div>
