@@ -1,5 +1,7 @@
 A Meme generator that allows users to click a "Get a new image" button and add text to create a custom meme.
 
+Can be viewed at http://www.christinagraham.tech/meme/
+
 Technical details:
 I created this React project using functional components and mainted state by declaring state variables with the useState hook.
 
